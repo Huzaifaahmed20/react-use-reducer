@@ -20,9 +20,26 @@ function App() {
         const posts = await (
           await fetch('https://jsonplaceholder.typicode.com/posts')
         ).json();
+        const comments = await (
+          await fetch('https://jsonplaceholder.typicode.com/comments')
+        ).json();
+
+        const postWithComments = posts.map((i) => {
+          const _comments = [];
+          comments.forEach((comment) => {
+            if (comment.postId === i.id) {
+              _comments.push(comment);
+            }
+          });
+          return {
+            ...i,
+            _comments,
+          };
+        });
+
         dispatch({
           type: actions.GET_POSTS_SUCCESS,
-          payload: posts,
+          payload: postWithComments,
         });
       } catch (error) {
         dispatch({

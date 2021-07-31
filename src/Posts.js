@@ -17,6 +17,21 @@ export const Posts = () => {
                 </b>
                 <p>{post.body}</p>
               </li>
+              <u>
+                <h4>Comments</h4>
+              </u>
+              <ul>
+                {post._comments.map((comment) => {
+                  return (
+                    <li key={comment.id}>
+                      <b>
+                        <h3>{comment.name}</h3>
+                      </b>
+                      <p>{comment.body}</p>
+                    </li>
+                  );
+                })}
+              </ul>
               <hr />
             </div>
           );
