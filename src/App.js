@@ -1,5 +1,10 @@
 import { useEffect, useReducer } from 'react';
-import { actions, initialState, postReducer } from './state/posts';
+import {
+  actions,
+  initialState,
+  postReducer,
+  StoreContext,
+} from './state/posts';
 import './App.css';
 import { Posts } from './Posts';
 
@@ -29,10 +34,12 @@ function App() {
   }, []);
 
   return (
-    <div className='App'>
-      {state.loading && <p>LOADING ........</p>}
-      <Posts />
-    </div>
+    <StoreContext.Provider value={{ dispatch, state }}>
+      <div>
+        {state.loading && <p>LOADING ........</p>}
+        <Posts />
+      </div>
+    </StoreContext.Provider>
   );
 }
 
